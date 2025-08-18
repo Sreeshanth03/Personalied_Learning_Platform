@@ -2,10 +2,13 @@ const express=require('express');
 const app=express();
 const dotenv=require('dotenv')
 dotenv.config();
+const cors = require("cors");
 const {router}=require("./Routers/authRouters.js")
 const {router1}=require("./Routers/UserRoutes.js")
 const{managerrouter}=require("./Routers/Mangaers.js")
 const {Student}=require("./Routers/Student.js")
+//calling cors
+app.use(cors());
 //importing Db connection
 const {ConnectionDb}=require("./Config/Database.js")
 ConnectionDb()
