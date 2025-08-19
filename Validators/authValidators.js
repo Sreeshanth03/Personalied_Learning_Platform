@@ -37,7 +37,7 @@ const LoginValidator = [
     .trim()
     .withMessage("Email Required"),
   body("password").isString().trim().withMessage("Required Password"),
-  body("role").isString().trim().withMessage("Role is req"),
+  body("role").isString().optional().trim().withMessage("Role is req"),
   (req, res, next) => {
     const error = validationResult(req);
     if (!error.isEmpty()) {
