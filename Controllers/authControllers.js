@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 async function Signin(req, res) {
   try {
-    const { name, username, email, password, role } = req.body;
+    const {   email, password, role } = req.body;
     const hashpassword = await bcrypt.hash(password, 12);
     const user = new UserModel({
       name: name,
