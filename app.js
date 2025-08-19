@@ -8,7 +8,9 @@ const {router1}=require("./Routers/UserRoutes.js")
 const{managerrouter}=require("./Routers/Mangaers.js")
 const {Student}=require("./Routers/Student.js")
 //calling cors
-app.use(cors());
+app.use(cors({
+    origin:"http://localhost:5173"
+}));
 //importing Db connection
 const {ConnectionDb}=require("./Config/Database.js")
 ConnectionDb()

@@ -6,6 +6,7 @@ const SignValidator = [
     .isString()
     .trim()
     .withMessage("Required UserName"),
+    body("email").optional().withMessage("Email is Required"),
   body("password")
     .optional()
     .isString()
