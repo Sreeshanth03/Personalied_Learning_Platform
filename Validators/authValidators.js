@@ -6,7 +6,7 @@ const SignValidator = [
     .isString()
     .trim()
     .withMessage("Required UserName"),
-    body("email").optional().withMessage("Email is Required"),
+    body("email").isEmail().withMessage("Email is Required"),
   body("password")
     .optional()
     .isString()
@@ -33,7 +33,7 @@ const LoginValidator = [
   //   .withMessage("Name Required"),
   body("email")
     .isLength({ min: 2, max: 89 })
-    .isString()
+ 
     .trim()
     .withMessage("Email Required"),
   body("password").isString().trim().withMessage("Required Password"),
