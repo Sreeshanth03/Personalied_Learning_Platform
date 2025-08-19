@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 async function Signin(req, res) {
   try {
-    const {   email, password, role } = req.body;
+    const { name, username, email, password, role } = req.body;
     const hashpassword = await bcrypt.hash(password, 12);
     const user = new UserModel({
       name: name,
@@ -25,8 +25,8 @@ async function Signin(req, res) {
 //Login
 async function Login(req, res, next) {
   try {
-    const { username, password } = req.body;
-    const db_user_details = await UserModel.findOne({ username:username });
+    const { email, password } = req.body;
+    const db_user_details = await UserModel.findOne({ email:email});
     // .select["-password"]  --> we can use these to exclude
     if (!db_user_details) {
       res.status(400).send("Details Required");
