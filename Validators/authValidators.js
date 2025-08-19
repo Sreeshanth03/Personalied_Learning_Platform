@@ -25,11 +25,11 @@ const SignValidator = [
   },
 ];
 const LoginValidator = [
-  body("name")
-    .isLength({ min: 2, max: 12 })
-    .isString()
-    .trim()
-    .withMessage("Name Required"),
+  // body("name")
+  //   .isLength({ min: 2, max: 12 })
+  //   .isString()
+  //   .trim()
+  //   .withMessage("Name Required"),
   body("email")
     .isLength({ min: 2, max: 89 })
     .isString()
