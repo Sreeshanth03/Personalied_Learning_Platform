@@ -12,10 +12,14 @@ dotenv.config();
 
 async function ConnectionDb() {
   try {
-    await mongoose.connect(process.env.mongo_db_uri + process.env.mongodb_name, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(
+      `${process.env.mongo_db_uri}/${process.env.mongodb_name}`,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    );
+    // console.log(  `${process.env.mongo_db_uri}/${process.env.mongodb_name}`)
     console.log("MongoDB connected");
   } catch (err) {
     console.error("MongoDB connection error:", err);
@@ -23,4 +27,4 @@ async function ConnectionDb() {
   }
 }
 
-module.exports = {ConnectionDb};
+module.exports = { ConnectionDb };

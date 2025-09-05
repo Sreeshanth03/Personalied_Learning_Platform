@@ -55,9 +55,25 @@ const editProfileVadilitor = [
     .withMessage("Email Required"),
   body("password").isString().trim().withMessage("Password Required"),
 ];
+const validateMiddleware = (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    const err = {
+      message: "Validation Login Error",
+      statusCode: 400,
+      errors: errors.array(), // send validation details if needed
+    };
+    return next(err); // stop here and pass error
+  }
+
+  // if no error, continue
+  next();
+};
 module.exports = {
   SignValidator,
   LoginValidator,
   TokenValidators,
+  validateMiddleware,
   editProfileVadilitor,
 };

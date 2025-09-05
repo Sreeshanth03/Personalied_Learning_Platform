@@ -8,6 +8,7 @@ const {router1}=require("./Routers/UserRoutes.js")
 const{managerrouter}=require("./Routers/Mangaers.js")
 const {Student}=require("./Routers/Student.js")
 const {Courses_router}=require("./Routers/Courses_Router.js")
+const {errorhandling}=require("./Middlewares/ErrorHandlingMiddleWare.js")
 //calling cors
 app.use(cors({
     origin:"http://localhost:5173",
@@ -22,7 +23,7 @@ app.use(express.json())
 app.use(express.urlencoded())
 //api
 app.use("/auth",router)
-app.use("/user",router1)
+// app.use("/user",router1)
 // app.use("/tickect",managerrouter)
 // app.use("/Student",Student)
 app.use("/Courses",Courses_router)
@@ -32,10 +33,6 @@ app.use("/Courses",Courses_router)
 // })
 
 //error handling
-const  errorhandling=(err,req,res,next)=>{
-console.log(err)
-res.json({statusCode:err.statusCode,message:err.message,errors:err.errors})
-}
 app.use(errorhandling)
 //Server
 app.listen(process.env.Port,()=>{console.log("The server is running")})
