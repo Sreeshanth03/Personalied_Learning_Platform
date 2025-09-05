@@ -6,6 +6,6 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, unique: true, required: true },
   role: { type: String, enum: ["Admin", "Student", "Instructor"] },
   profilepic: { type: String },
-});
+},{timestamps:true});
 const UserModel = mongoose.model("Users", UserSchema);
 module.exports = { UserModel };

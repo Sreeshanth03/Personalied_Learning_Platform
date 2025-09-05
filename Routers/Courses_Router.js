@@ -1,6 +1,11 @@
 const express = require("express");
 const { upload } = require("../Utiles/Multer");
-const { createCourses } = require("../Controllers/CoursesControllers");
+
+const {
+  createCourses,
+  GetAllCourses,
+  GetById,
+} = require("../Controllers/CoursesControllers");
 const { checkAuth, checkRole } = require("../Middlewares/authMiddleWare");
 const {
   TokenValidators,
@@ -16,6 +21,22 @@ Courses_router.post(
   checkRole("Instructor"),
   upload.single("viedo"),
   createCourses
+);
+Courses_router.get(
+  "/all",
+  TokenValidators,
+  validateMiddleware,
+  checkAuth,
+  checkRole("Instructor"),
+  GetAllCourses
+);
+Courses_router.get(
+  "/all/:id",
+  TokenValidators,
+  validateMiddleware,
+  checkAuth,
+  checkRole("Instructor"),
+  GetById
 );
 
 module.exports = { Courses_router };

@@ -3,7 +3,10 @@ const { CloudinaryFileUploadFromBuffer } = require("../Utiles/Cloduniary.js");
 
 async function createCourses(req, res) {
   try {
-    const file = req.file;
+    const { title, description, category } = req.body; // text fields
+const file = req.file; // uploaded file
+
+    // const { title, description, category, file } = req.file;
     console.log("File received:", req.file);
     if (!file) return res.status(400).json({ message: "No file uploaded" });
 
@@ -13,7 +16,12 @@ async function createCourses(req, res) {
       file.originalname
     );
     try {
-      const course = new Course_Model({ video: videoUrl });
+      const course = new Course_Model({
+        title: title,
+        description: description,
+        category: category,
+        video: videoUrl,
+      });
       await course.save();
       console.log("Saved to DB:", course);
       res.status(200).json(course);
@@ -25,5 +33,21 @@ async function createCourses(req, res) {
     res.status(400).json({ message: error.message });
   }
 }
+async function GetAllCourses(req, res) {
+  try {
+    // Fetch all courses from the database
+    const courses = await Course_Model.find(); // returns an array of courses
 
-module.exports = { createCourses };
+    // Send the courses as JSON response
+    res.status(200).json({ courses });
+  } catch (error) {
+    // Handle errors
+    res.status(500).json({ message: error.message });
+  }
+}
+async function GetById(req,res){
+
+}
+
+
+module.exports = { createCourses, GetAllCourses,GetById };

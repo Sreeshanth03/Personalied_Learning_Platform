@@ -14,9 +14,7 @@
 // const Course_Model = mongoose.model("courses", Course_Schema);
 // module.exports = { Course_Model };
 
-
-
-// new 
+// new
 // const { Schema, Types } = require("mongoose");
 // const Course_Schema = new mongoose.Schema({
 //   video: { type: String },
@@ -32,15 +30,16 @@ const mongoose = require("mongoose");
 const { Schema, Types } = mongoose;
 
 const Course_Schema = new Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  category: { type: String },
   video: { type: String },
-
-  createdAt: { type: Date, default: Date.now },
+createdAt: { type: Date, default: Date.now },
 
   // Correct way to use ObjectId
-  createdBy: { type: Types.ObjectId, ref: "User" }, 
-});
+createdBy: { type: Types.ObjectId, ref: "User" },
+},{timestamps:true});
 
 const Course_Model = mongoose.model("Course", Course_Schema);
 
 module.exports = { Course_Model };
-
