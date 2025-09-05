@@ -4,9 +4,6 @@ const dotenv=require('dotenv')
 dotenv.config();
 const cors = require("cors");
 const {router}=require("./Routers/authRouters.js")
-const {router1}=require("./Routers/UserRoutes.js")
-const{managerrouter}=require("./Routers/Mangaers.js")
-const {Student}=require("./Routers/Student.js")
 const {Courses_router}=require("./Routers/Courses_Router.js")
 const {errorhandling}=require("./Middlewares/ErrorHandlingMiddleWare.js")
 //calling cors
@@ -21,12 +18,11 @@ ConnectionDb()
 //MiddleWares
 app.use(express.json())
 app.use(express.urlencoded())
+
 //api
 app.use("/auth",router)
-// app.use("/user",router1)
-// app.use("/tickect",managerrouter)
-// app.use("/Student",Student)
 app.use("/Courses",Courses_router)
+
 //Demo Routing
 // app.get("/nani",(req,res)=>{
 //     res.send("The servre is her")
