@@ -1,4 +1,5 @@
-const User = require("../Models/Models");
+const {UserModel}=require("../Models/Models")
+const {Course_Model}=require("../Models/Course")
 const { Enroll_Model } = require("../Models/Enrollment");
 
 // Student enrollment

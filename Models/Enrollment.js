@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");
 const Enroll_Schema=mongoose.Schema({
-    student:{type:mongoose.Schema.Types.ObjectId,ref:"User"},
+    student:{type:mongoose.Schema.Types.ObjectId,ref:"Users"},
     course:{type:mongoose.Schema.Types.ObjectId,ref:"Course"},
     enrolledAt:{type:Date,default:Date.now}
 })
