@@ -3,14 +3,14 @@ const { checkAuth, checkRole } = require("../Middlewares/authMiddleWare");
 const {
   TokenValidators,
   validateMiddleware,
-} = require("../Validators/authValidators");
+} = require("../Validators/authValidators.js");
 
 const {
   getAvailableCourses,
   getCourseById,
   getMyEnrollments,
   getLessonsForCourse,
-} = require("../Controllers/StudentControllers");
+} = require("../Controllers/StudentController.js");
 
 const Student_Router = express.Router();
 
