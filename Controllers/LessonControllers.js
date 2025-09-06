@@ -10,6 +10,7 @@ async function createLesson(req, res) {
     const { title, course, order } = req.body;
 
     // ✅ Validate course exists
+    console.log(course);
     const DataCourse = await Course_Model.findById(course);
     console.log(DataCourse);
     if (!DataCourse) {
