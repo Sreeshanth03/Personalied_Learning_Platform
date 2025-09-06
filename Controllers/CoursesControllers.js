@@ -1,14 +1,11 @@
 const { Course_Model } = require("../Models/Course.js");
 const { CloudinaryFileUploadFromBuffer } = require("../Utiles/Cloduniary.js");
 
-
 async function createCourses(req, res) {
   try {
-    const { title, description,course, category } = req.body; // text fields
-const file = req.file; // uploaded file
+    const { title, description, category } = req.body; // text fields
+    const file = req.file; // uploaded file
 
-    // const { title, description, category, file } = req.file;
-    // console.log("File received:", req.file);
     if (!file) return res.status(400).json({ message: "No file uploaded" });
 
     // Upload to Cloudinary using buffer + originalname
@@ -16,41 +13,54 @@ const file = req.file; // uploaded file
       file.buffer,
       file.originalname
     );
-    try {
-      const course = new Course_Model({
-        title: title,
-        description: description,
-        category: category,
-        video: videoUrl,
-      });
-      await course.save();
-      console.log("Saved to DB:", course);
-      res.status(200).json(course);
-    } catch (err) {
-      console.error("Error saving to DB:", err);
-      res.status(500).json({ message: err.message, error: "err" });
-    }
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-}
-async function GetAllCourses(req, res) {
-  try {
-    // Fetch all courses from the database
-    const courses = await Course_Model.find(); // returns an array of courses
 
-    // Send the courses as JSON response
-    res.status(200).json({ courses });
+    // ✅ Save with createdBy (schema field)
+    const course = new Course_Model({
+      title,
+      description,
+      category,
+      video: videoUrl,
+      createdBy: req.user.id, // use createdBy instead of instructor
+    });
+
+    await course.save();
+    console.log("Saved to DB:", course);
+
+    res.status(200).json(course);
   } catch (error) {
-    // Handle errors
+    console.error("Error creating course:", error);
     res.status(500).json({ message: error.message });
   }
 }
-//Get by Id
-async function GetById(req,res){
 
+async function GetAllCourses(req, res) {
+  try {
+    // ✅ populate instructor info (name + email) using createdBy field
+    const courses = await Course_Model.find()
+      .populate("createdBy", "name email");
+
+    res.status(200).json({ courses });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 }
 
+// ✅ Get single course by Id
+async function GetById(req, res) {
+  try {
+    const { id } = req.params;
+    const course = await Course_Model.findById(id)
+      .populate("createdBy", "name email")
+      .populate("students", "name email");
 
+    if (!course) {
+      return res.status(404).json({ message: "Course not found" });
+    }
 
-module.exports = { createCourses, GetAllCourses,GetById };
+    res.status(200).json(course);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+module.exports = { createCourses, GetAllCourses, GetById };
