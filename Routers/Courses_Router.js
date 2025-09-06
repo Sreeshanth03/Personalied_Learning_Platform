@@ -1,6 +1,9 @@
 const express = require("express");
 const { upload } = require("../Utiles/Multer");
-const { enrollStudent, getEnrolledStudents } = require("../Controllers/EnrollmentsControllers");
+const {
+  enrollStudent,
+  getEnrolledStudents,
+} = require("../Controllers/EnrollmentsControllers");
 const {
   createCourses,
   GetAllCourses,
@@ -43,6 +46,7 @@ Courses_router.post(
   "/:courseId/enroll",
   TokenValidators,
   validateMiddleware,
+    checkAuth,
   checkRole("Student"),
   enrollStudent
 );
@@ -52,6 +56,7 @@ Courses_router.get(
   "/:courseId/enrollments",
   TokenValidators,
   validateMiddleware,
+  checkAuth,
   checkRole("Instructor"),
   getEnrolledStudents
 );
