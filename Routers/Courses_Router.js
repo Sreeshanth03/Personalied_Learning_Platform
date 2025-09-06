@@ -1,6 +1,6 @@
 const express = require("express");
 const { upload } = require("../Utiles/Multer");
-
+const { enrollStudent, getEnrolledStudents } = require("../Controllers/EnrollmentsControllers");
 const {
   createCourses,
   GetAllCourses,
@@ -37,6 +37,21 @@ Courses_router.get(
   checkAuth,
   checkRole("Instructor"),
   GetById
+);
+
+Courses_router.post(
+  "/:courseId/enroll",
+  TokenValidators,
+  checkRole("Student"),
+  enrollStudent
+);
+
+// Instructor - get enrollments API
+Courses_router.get(
+  "/:courseId/enrollments",
+  TokenValidators,
+  checkRole("Instructor"),
+  getEnrolledStudents
 );
 
 module.exports = { Courses_router };

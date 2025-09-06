@@ -1,6 +1,7 @@
 const { Course_Model } = require("../Models/Course.js");
 const { CloudinaryFileUploadFromBuffer } = require("../Utiles/Cloduniary.js");
 
+
 async function createCourses(req, res) {
   try {
     const { title, description,course, category } = req.body; // text fields
@@ -45,9 +46,11 @@ async function GetAllCourses(req, res) {
     res.status(500).json({ message: error.message });
   }
 }
+//Get by Id
 async function GetById(req,res){
 
 }
+
 
 
 module.exports = { createCourses, GetAllCourses,GetById };
