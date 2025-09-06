@@ -35,7 +35,7 @@ const Course_Schema = new Schema({
   category: { type: String },
   video: { type: String },
 createdAt: { type: Date, default: Date.now },
-
+students: [{ type: Types.ObjectId, ref: "User" }],
   // Correct way to use ObjectId
 createdBy: { type: Types.ObjectId, ref: "User" },
 },{timestamps:true});
