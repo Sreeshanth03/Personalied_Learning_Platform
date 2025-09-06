@@ -3,7 +3,7 @@ const { CloudinaryFileUploadFromBuffer } = require("../Utiles/Cloduniary.js");
 
 async function createCourses(req, res) {
   try {
-    const { title, description, category } = req.body; // text fields
+    const { title, description,course, category } = req.body; // text fields
 const file = req.file; // uploaded file
 
     // const { title, description, category, file } = req.file;
