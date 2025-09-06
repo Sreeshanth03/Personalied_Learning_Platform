@@ -35,11 +35,13 @@ const Course_Schema = new Schema({
   category: { type: String },
   video: { type: String },
 createdAt: { type: Date, default: Date.now },
-students: [{ type: Types.ObjectId, ref: "User" }],
+students: [{ type: Types.ObjectId, ref: "Users" }],
   // Correct way to use ObjectId
-createdBy: { type: Types.ObjectId, ref: "User" },
+createdBy: { type: Types.ObjectId, ref: "Users" },
 },{timestamps:true});
 
 const Course_Model = mongoose.model("Course", Course_Schema);
 
 module.exports = { Course_Model };
+
+// 68baff4c83475a1a7ea2dc85

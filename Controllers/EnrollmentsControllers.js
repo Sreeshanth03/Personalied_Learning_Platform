@@ -1,3 +1,4 @@
+const User = require("../Models/Models");
 const { Enroll_Model } = require("../Models/Enrollment");
 
 // Student enrollment
