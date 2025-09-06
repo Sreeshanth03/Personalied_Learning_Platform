@@ -1,7 +1,7 @@
 const express = require("express");
 const { upload } = require("../Utiles/Multer");
 const Lesson_Router = express.Router();
-const { createLesson } = require("../Controllers/LessonControllers");
+const { createLesson,GetLessons } = require("../Controllers/LessonControllers");
 const {
   TokenValidators,
   validateMiddleware,
@@ -16,4 +16,8 @@ Lesson_Router.post(
   upload.single("content"),
   createLesson
 );
+Lesson_Router.get("/all", TokenValidators,
+  validateMiddleware,
+  checkAuth,
+  checkRole("Instructor"),GetLessons)
 module.exports = { Lesson_Router };

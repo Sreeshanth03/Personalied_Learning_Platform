@@ -32,5 +32,17 @@ async function createLesson(req, res) {
     res.status(500).json({ message: error.message });
   }
 }
+async function GetLessons(req, res) {
+  try {
+    const Lessons=await Lesson_Model.find();
+    res.status(200).json({
+      "message":"All Are Fetched",
+      Lessons
+    })
+    
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
 
-module.exports = { createLesson };
+module.exports = { createLesson, GetLessons };
