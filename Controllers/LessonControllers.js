@@ -11,6 +11,7 @@ async function createLesson(req, res) {
 
     // ✅ Validate course exists
     const DataCourse = await Course_Model.findById(course);
+    console.log(DataCourse);
     if (!DataCourse) {
       return res.status(404).json({ message: "Course not found" });
     }
