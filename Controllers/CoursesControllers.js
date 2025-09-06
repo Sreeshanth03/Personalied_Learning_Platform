@@ -7,7 +7,7 @@ async function createCourses(req, res) {
 const file = req.file; // uploaded file
 
     // const { title, description, category, file } = req.file;
-    console.log("File received:", req.file);
+    // console.log("File received:", req.file);
     if (!file) return res.status(400).json({ message: "No file uploaded" });
 
     // Upload to Cloudinary using buffer + originalname
