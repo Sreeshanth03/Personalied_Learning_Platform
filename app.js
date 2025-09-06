@@ -7,6 +7,7 @@ const {router}=require("./Routers/authRouters.js")
 const {Courses_router}=require("./Routers/Courses_Router.js")
 const {errorhandling}=require("./Middlewares/ErrorHandlingMiddleWare.js")
 const {Lesson_Router}=require("./Routers/Lesson_Routes.js")
+const {Student_Router}=require("./Routers/StudentRoutes.js")
 //calling cors
 app.use(cors({
     origin:"http://localhost:5173",
@@ -24,6 +25,7 @@ app.use(express.urlencoded())
 app.use("/auth",router)
 app.use("/Courses",Courses_router)
 app.use("/Lessons",Lesson_Router)
+app.use("/student",Student_Router)
 //Demo Routing
 // app.get("/nani",(req,res)=>{
 //     res.send("The servre is her")
