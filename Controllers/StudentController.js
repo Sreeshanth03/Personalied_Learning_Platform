@@ -5,7 +5,7 @@ const { Lesson_Model } = require("../Models/Lessons");
 // ✅ Get all available courses
 const getAvailableCourses = async (req, res) => {
   try {
-    const courses = await Course_Model.find().populate("instructor", "name email");
+    const courses = await Course_Model.find().populate("createdBy", "name email");
     res.json(courses);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -15,7 +15,8 @@ const getAvailableCourses = async (req, res) => {
 // ✅ Get single course by ID
 const getCourseById = async (req, res) => {
   try {
-    const course = await Course_Model.findById(req.params.id).populate("instructor", "name email");
+    const course = await Course_Model.findById(req.params.id)
+      .populate("createdBy", "name email"); // use createdBy
     if (!course) return res.status(404).json({ message: "Course not found" });
     res.json(course);
   } catch (error) {
@@ -27,7 +28,7 @@ const getCourseById = async (req, res) => {
 const getMyEnrollments = async (req, res) => {
   try {
     const enrollments = await Enroll_Model.find({ student: req.user._id })
-      .populate("course", "title description")
+      .populate("course", "title description createdBy") // include createdBy if needed
       .populate("student", "name email");
 
     res.json(enrollments);
