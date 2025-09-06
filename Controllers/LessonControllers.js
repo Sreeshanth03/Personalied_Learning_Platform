@@ -9,12 +9,12 @@ async function createLesson(req, res) {
       course: course,
     //   content,
     });
-    await Lesson_Model.save();
+    await Lesson_data.save();
     res
       .status(200)
       .json({ message: "Lessons Posted Successfully", Lesson_data });
   } catch (error) {
-    res.status(400).json({ message: error });
+    res.status(400).json({ message: error.message });
   }
 }
 module.exports = { createLesson };
