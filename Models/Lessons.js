@@ -3,7 +3,7 @@ const Lesson_Schema = mongoose.Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
   course: {
-    type: mongoose.SchemaTypes.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Course",
     required: true,
   },

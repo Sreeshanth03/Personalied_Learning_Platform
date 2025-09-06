@@ -1,4 +1,6 @@
 const { Course_Model } = require("../Models/Course.js");
+const { Progress_Model } = require("../Models/Progess.js");
+const { Lesson_Model } = require("../Models/Lessons.js");
 const { CloudinaryFileUploadFromBuffer } = require("../Utiles/Cloduniary.js");
 
 async function createCourses(req, res) {
@@ -62,5 +64,34 @@ async function GetById(req, res) {
     res.status(500).json({ message: error.message });
   }
 }
+const getCourseProgress = async (req, res) => {
+  try {
+    const { courseId } = req.params;
 
-module.exports = { createCourses, GetAllCourses, GetById };
+    // fetch all students enrolled in this course
+    const enrollments = await Enroll_Model.find({ course: courseId }).populate("student", "name email");
+
+    const progressList = await Promise.all(
+      enrollments.map(async (enroll) => {
+        const progress = await Progress_Model.findOne({ student: enroll.student._id, course: courseId });
+        const totalLessons = await Lesson_Model.countDocuments({ course: courseId });
+        const completedCount = progress ? progress.completedLessons.length : 0;
+        const percentage = totalLessons ? (completedCount / totalLessons) * 100 : 0;
+
+        return {
+          student: enroll.student,
+          completedCount,
+          totalLessons,
+          percentage: percentage.toFixed(2),
+          completedLessons: progress ? progress.completedLessons : [],
+        };
+      })
+    );
+
+    res.status(200).json(progressList);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+module.exports = { createCourses, GetAllCourses, GetById,getCourseProgress };

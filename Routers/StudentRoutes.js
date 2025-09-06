@@ -10,6 +10,7 @@ const {
   getCourseById,
   getMyEnrollments,
   getLessonsForCourse,
+  getStudentProgress,
 } = require("../Controllers/StudentController.js");
 
 const Student_Router = express.Router();
@@ -52,6 +53,13 @@ Student_Router.get(
   checkAuth,
   checkRole("Student"),
   getLessonsForCourse
+);
+// Student
+Student_Router.get(
+  "/courses/:courseId/progress",
+  checkAuth,
+  checkRole("Student"),
+  getStudentProgress
 );
 
 module.exports = { Student_Router };

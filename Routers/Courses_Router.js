@@ -8,6 +8,7 @@ const {
   createCourses,
   GetAllCourses,
   GetById,
+  getCourseProgress,
 } = require("../Controllers/CoursesControllers");
 const { checkAuth, checkRole } = require("../Middlewares/authMiddleWare");
 const {
@@ -46,7 +47,7 @@ Courses_router.post(
   "/:courseId/enroll",
   TokenValidators,
   validateMiddleware,
-    checkAuth,
+  checkAuth,
   checkRole("Student"),
   enrollStudent
 );
@@ -59,6 +60,12 @@ Courses_router.get(
   checkAuth,
   checkRole("Instructor"),
   getEnrolledStudents
+);
+Courses_router.get(
+  "/:courseId/progress",
+  checkAuth,
+  checkRole("Instructor"),
+  getCourseProgress
 );
 
 module.exports = { Courses_router };
