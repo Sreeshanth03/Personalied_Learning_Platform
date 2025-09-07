@@ -13,7 +13,7 @@ dotenv.config();
 async function ConnectionDb() {
   try {
     await mongoose.connect(
-      `${process.env.mongo_db_uri}/${process.env.mongodb_name}`,
+      `${process.env.mongo_db_uri}`,
       {
         // useNewUrlParser: true,
         // useUnifiedTopology: true,
