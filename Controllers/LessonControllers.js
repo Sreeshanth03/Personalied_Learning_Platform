@@ -32,7 +32,8 @@ async function createLesson(req, res) {
     res.status(500).json({ message: error.message });
   }
 }
-async function GetLessons(req, res) {
+async function 
+GetLessons(req, res) {
   try {
     const Lessons=await Lesson_Model.find();
     res.status(200).json({
