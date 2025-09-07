@@ -8,23 +8,26 @@
 // ---------------------------------------------------------
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+
+// Load environment variables from .env
 dotenv.config();
 
 async function ConnectionDb() {
   try {
-    await mongoose.connect(
-      `${process.env.mongo_db_uri}`,
-      {
-        // useNewUrlParser: true,
-        // useUnifiedTopology: true,
-      }
-    );
-    // console.log(  `${process.env.mongo_db_uri}/${process.env.mongodb_name}`)
-    console.log("MongoDB connected");
+    // ✅ Use template string if you want to include db name separately
+    const uri = `${process.env.MONGO_DB_URI}/${process.env.MONGO_DB_NAME}`;
+
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+
+    console.log("✅ MongoDB connected successfully");
   } catch (err) {
-    console.error("MongoDB connection error:", err);
-    process.exit(1); // exit if connection fails
+    console.error("❌ MongoDB connection error:", err.message);
+    process.exit(1); // Exit process if DB connection fails
   }
 }
 
-module.exports = { ConnectionDb };
+module.exports = {ConnectionDb};
+

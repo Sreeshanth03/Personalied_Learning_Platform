@@ -19,5 +19,5 @@ Lesson_Router.post(
 Lesson_Router.get("/all", TokenValidators,
   validateMiddleware,
   checkAuth,
-  checkRole("Instructor"),GetLessons)
+GetLessons)
 module.exports = { Lesson_Router };

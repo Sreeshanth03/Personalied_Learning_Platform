@@ -43,14 +43,14 @@ Courses_router.get(
   GetById
 );
 
-Courses_router.post(
-  "/:courseId/enroll",
-  TokenValidators,
-  validateMiddleware,
-  checkAuth,
-  checkRole("Student"),
-  enrollStudent
-);
+  Courses_router.post(
+    "/:courseId/enroll",
+    TokenValidators,
+    validateMiddleware,
+    checkAuth,
+    checkRole("Student"),
+    enrollStudent
+  );
 
 // Instructor - get enrollments API
 Courses_router.get(
