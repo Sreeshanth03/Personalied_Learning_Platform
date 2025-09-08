@@ -33,12 +33,12 @@ const getCourseById = async (req, res) => {
 // ✅ Get enrolled courses of logged-in student
 const getMyEnrollments = async (req, res) => {
   try {
-    
-    const enrollments = await Enroll_Model.find({ student: req.user.id })
+    const userId=req.user.id
+    const enrollments = await Enroll_Model.find({ userId })
       .populate("course", "title description createdBy") // include createdBy if needed
       .populate("student", "name email");
-
-    res.json(enrollments);
+console.log(enrollments)
+    res.status(200).json(enrollments);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -2,7 +2,7 @@ const { Course_Model } = require("../Models/Course.js");
 const { Progress_Model } = require("../Models/Progess.js");
 const { Lesson_Model } = require("../Models/Lessons.js");
 const { CloudinaryFileUploadFromBuffer } = require("../Utiles/Cloduniary.js");
-
+const {Enroll_Model}=require("../Models/Enrollment.js")
 async function createCourses(req, res) {
   try {
     const { title, description, category } = req.body; // text fields
