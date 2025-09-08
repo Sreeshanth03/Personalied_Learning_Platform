@@ -7,10 +7,11 @@ const enrollStudent = async (req, res) => {
   try {
     const { courseId } = req.params;
     const studentId = req.user.id; // token nundi student id
-console.log(courseId)
+
     // 1. Course exists check
     const course = await Course_Model.findById(courseId);
-    console.log(course)
+
+    
     if (!course) {
       return res.status(404).json({ message: "Course not found" });
     }
