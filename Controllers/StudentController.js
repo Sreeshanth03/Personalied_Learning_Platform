@@ -1,5 +1,6 @@
 const { Course_Model } = require("../Models/Course.js");
 const { Enroll_Model } = require("../Models/Enrollment.js");
+const {UserModel}=require("../Models/Models.js")
 const { Lesson_Model } = require("../Models/Lessons.js");
 const { Progress_Model } = require("../Models/Progess.js");
 // ✅ Get all available courses
@@ -32,7 +33,8 @@ const getCourseById = async (req, res) => {
 // ✅ Get enrolled courses of logged-in student
 const getMyEnrollments = async (req, res) => {
   try {
-    const enrollments = await Enroll_Model.find({ student: req.user._id })
+    
+    const enrollments = await Enroll_Model.find({ student: req.user.id })
       .populate("course", "title description createdBy") // include createdBy if needed
       .populate("student", "name email");
 
