@@ -15,7 +15,7 @@ dotenv.config();
 async function ConnectionDb() {
   try {
     // ✅ Use template string if you want to include db name separately
-    const uri = `${process.env.mongo_db_uri}/${process.env.mongodb_name}`;
+    const uri = `${process.env.mongo_db_uri}`;
 
     await mongoose.connect(uri, {
       useNewUrlParser: true,
